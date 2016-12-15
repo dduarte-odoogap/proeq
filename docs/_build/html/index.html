@@ -45,6 +45,94 @@
 <h1>Welcome to ProEQ&#8217;s documentation!<a class="headerlink" href="#welcome-to-proeq-s-documentation" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
+<div class="section" id="install-development">
+<h2>Install Development<a class="headerlink" href="#install-development" title="Permalink to this headline">¶</a></h2>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">virtualenv</span> <span class="o">.</span><span class="n">env</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span>
+<span class="n">echo</span> <span class="s1">&#39;eval &quot;$(_PROEQ_COMPLETE=source proeq)&quot;&#39;</span> <span class="o">&lt;&lt;</span> <span class="o">~/.</span><span class="n">bashrc</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-user-folder">
+<h2>Create User Folder<a class="headerlink" href="#create-user-folder" title="Permalink to this headline">¶</a></h2>
+<p>Use the following structure:</p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>.proeq</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>scripts</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>script-one</dt>
+<dd><ul class="first last">
+<li>manifest.yml</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>...</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>projects</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>project-one</dt>
+<dd><ul class="first last">
+<li>project.yml</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>...</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="yaml-structure">
+<h2>YAML Structure<a class="headerlink" href="#yaml-structure" title="Permalink to this headline">¶</a></h2>
+<div class="code yaml highlight-default"><div class="highlight"><pre><span></span><span class="n">manifest</span><span class="p">:</span>
+  <span class="c1">#id: install-odoo</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">Install</span> <span class="n">Odoo</span> <span class="mf">10.0</span> <span class="n">Ubuntu</span> <span class="mf">16.04</span><span class="n">LTS</span>
+  <span class="n">category</span><span class="p">:</span> <span class="n">Install</span>
+  <span class="n">scripts</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">order</span><span class="p">:</span> <span class="mi">2</span>
+      <span class="n">name</span><span class="p">:</span> <span class="n">Secure</span> <span class="n">the</span> <span class="n">ssh</span> <span class="n">server</span>
+      <span class="n">description</span><span class="p">:</span> <span class="n">Secures</span> <span class="n">de</span> <span class="n">ssh</span> <span class="n">server</span> <span class="n">then</span> <span class="n">installs</span> <span class="n">Odoo</span>
+      <span class="n">file</span><span class="p">:</span> <span class="n">sh</span><span class="o">/</span><span class="n">secure</span><span class="o">-</span><span class="n">ssh</span><span class="o">.</span><span class="n">sh</span>
+      <span class="nb">type</span><span class="p">:</span> <span class="n">bash</span>
+      <span class="n">ssh</span><span class="o">-</span><span class="n">server</span><span class="p">:</span>
+        <span class="n">host</span><span class="p">:</span> <span class="mf">10.167</span><span class="o">.</span><span class="mf">140.205</span>
+        <span class="n">user</span><span class="p">:</span> <span class="n">root</span>
+        <span class="n">port</span><span class="p">:</span> <span class="mi">22</span>
+    <span class="o">-</span> <span class="n">order</span><span class="p">:</span> <span class="mi">1</span>
+      <span class="n">name</span><span class="p">:</span> <span class="n">Loads</span> <span class="n">the</span> <span class="n">ssh</span> <span class="n">keys</span>
+      <span class="n">description</span><span class="p">:</span> <span class="n">Loads</span> <span class="n">the</span> <span class="n">ssh</span> <span class="n">keys</span> <span class="kn">from</span> <span class="nn">Carlos</span> <span class="ow">and</span> <span class="n">me</span>
+      <span class="n">file</span><span class="p">:</span> <span class="n">sh</span><span class="o">/</span><span class="n">load</span><span class="o">-</span><span class="n">keys</span><span class="o">.</span><span class="n">sh</span>
+      <span class="nb">type</span><span class="p">:</span> <span class="n">bash</span>
+      <span class="n">ssh</span><span class="o">-</span><span class="n">server</span><span class="p">:</span>
+        <span class="n">host</span><span class="p">:</span> <span class="mf">10.167</span><span class="o">.</span><span class="mf">140.205</span>
+        <span class="n">user</span><span class="p">:</span> <span class="n">root</span>
+        <span class="n">port</span><span class="p">:</span> <span class="mi">1033</span>
+  <span class="n">environment</span><span class="p">:</span>
+    <span class="n">xmlrpc</span><span class="p">:</span>
+      <span class="n">host</span><span class="p">:</span> <span class="mf">10.167</span><span class="o">.</span><span class="mf">140.205</span>
+      <span class="n">database</span><span class="p">:</span> <span class="n">v10_odoo</span>
+      <span class="n">port</span><span class="p">:</span> <span class="mi">8069</span>
+      <span class="n">user</span><span class="p">:</span> <span class="n">admin</span>
+      <span class="k">pass</span><span class="p">:</span> <span class="n">admin</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
@@ -66,7 +154,12 @@
             </a></p>
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Welcome to ProEQ&#8217;s documentation!</a></li>
+<li><a class="reference internal" href="#">Welcome to ProEQ&#8217;s documentation!</a><ul>
+<li><a class="reference internal" href="#install-development">Install Development</a></li>
+<li><a class="reference internal" href="#create-user-folder">Create User Folder</a></li>
+<li><a class="reference internal" href="#yaml-structure">YAML Structure</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 <div class="relations">
