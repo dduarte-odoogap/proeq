@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Structure for Scripts &#8212; ProEQ 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Structure for Projects" href="project.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="structure-for-scripts">
+<h1>Structure for Scripts<a class="headerlink" href="#structure-for-scripts" title="Permalink to this headline">¶</a></h1>
+<p>For scripts:</p>
+<div class="code yaml highlight-default"><div class="highlight"><pre><span></span><span class="n">manifest</span><span class="p">:</span>
+  <span class="c1">#id: install-odoo</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">Install</span> <span class="n">Odoo</span> <span class="mf">10.0</span> <span class="n">Ubuntu</span> <span class="mf">16.04</span><span class="n">LTS</span>
+  <span class="n">category</span><span class="p">:</span> <span class="n">Install</span>
+  <span class="n">scripts</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">order</span><span class="p">:</span> <span class="mi">2</span>
+      <span class="n">name</span><span class="p">:</span> <span class="n">Secure</span> <span class="n">the</span> <span class="n">ssh</span> <span class="n">server</span>
+      <span class="n">description</span><span class="p">:</span> <span class="n">Secures</span> <span class="n">de</span> <span class="n">ssh</span> <span class="n">server</span> <span class="n">then</span> <span class="n">installs</span> <span class="n">Odoo</span>
+      <span class="n">file</span><span class="p">:</span> <span class="n">sh</span><span class="o">/</span><span class="n">secure</span><span class="o">-</span><span class="n">ssh</span><span class="o">.</span><span class="n">sh</span>
+      <span class="nb">type</span><span class="p">:</span> <span class="n">bash</span>
+      <span class="n">ssh</span><span class="o">-</span><span class="n">server</span><span class="p">:</span>
+        <span class="n">host</span><span class="p">:</span> <span class="mf">10.167</span><span class="o">.</span><span class="mf">140.205</span>
+        <span class="n">user</span><span class="p">:</span> <span class="n">root</span>
+        <span class="n">port</span><span class="p">:</span> <span class="mi">22</span>
+    <span class="o">-</span> <span class="n">order</span><span class="p">:</span> <span class="mi">1</span>
+      <span class="n">name</span><span class="p">:</span> <span class="n">Loads</span> <span class="n">the</span> <span class="n">ssh</span> <span class="n">keys</span>
+      <span class="n">description</span><span class="p">:</span> <span class="n">Loads</span> <span class="n">the</span> <span class="n">ssh</span> <span class="n">keys</span> <span class="kn">from</span> <span class="nn">Carlos</span> <span class="ow">and</span> <span class="n">me</span>
+      <span class="n">file</span><span class="p">:</span> <span class="n">sh</span><span class="o">/</span><span class="n">load</span><span class="o">-</span><span class="n">keys</span><span class="o">.</span><span class="n">sh</span>
+      <span class="nb">type</span><span class="p">:</span> <span class="n">bash</span>
+      <span class="n">ssh</span><span class="o">-</span><span class="n">server</span><span class="p">:</span>
+        <span class="n">host</span><span class="p">:</span> <span class="mf">10.167</span><span class="o">.</span><span class="mf">140.205</span>
+        <span class="n">user</span><span class="p">:</span> <span class="n">root</span>
+        <span class="n">port</span><span class="p">:</span> <span class="mi">1033</span>
+  <span class="n">environment</span><span class="p">:</span>
+    <span class="n">xmlrpc</span><span class="p">:</span>
+      <span class="n">host</span><span class="p">:</span> <span class="mf">10.167</span><span class="o">.</span><span class="mf">140.205</span>
+      <span class="n">database</span><span class="p">:</span> <span class="n">v10_odoo</span>
+      <span class="n">port</span><span class="p">:</span> <span class="mi">8069</span>
+      <span class="n">user</span><span class="p">:</span> <span class="n">admin</span>
+      <span class="k">pass</span><span class="p">:</span> <span class="n">admin</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="project.html" title="previous chapter">Structure for Projects</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/scripts.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Diogo Duarte.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/scripts.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
