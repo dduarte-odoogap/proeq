@@ -4,7 +4,7 @@ import click
 import os
 import yaml
 import glob
-
+import subprocess, imp
 
 def ssh_in(host, port, user, content):
     ssh = paramiko.SSHClient()
@@ -15,6 +15,27 @@ def ssh_in(host, port, user, content):
         stdin, stdout, stderr = ssh.exec_command(line)
         for out in stdout:
             click.echo(out)
+
+
+def fabric_in(fab_command, base_path):
+    out = subprocess.check_output('cd %s && fab %s' % (base_path, fab_command), shell=True)
+    click.echo(out)
+
+
+def shell_in(content):
+    for line in iter(content.splitlines()):
+        out = subprocess.check_output(line, shell=True)
+        click.echo(out)
+
+
+def lxc_in(container_name, content):
+    for line in iter(content.splitlines()):
+        command = "lxc exec {container_name} -- {line}".format(
+            container_name=container_name,
+            line=line
+        )
+        out = subprocess.check_output(command, shell=True)
+        click.echo(out)
 
 
 class Proeq(object):
@@ -59,6 +80,10 @@ class Proeq(object):
 @click.option('--proeq-home', envvar='PROEQ_HOME', default='~/.proeq', help='Project repo home')
 @click.pass_context
 def cli(ctx, proeq_home):
+    """ProEQ is a tool made for making developers life easier based on that you already have
+    scripts built in bash. This tool allows you to store all info about your projects, as well
+    as collecting and listing your scripts.
+    """
     ctx.obj = Proeq(proeq_home)
 
 
@@ -81,36 +106,56 @@ def list_all(repo, all):
             click.echo('\t' + project['project'].get('comments', ''))
 
 
-@click.command('list-src', short_help='List all scripts')
+@click.command('src-list', short_help='List all scripts')
 @click.pass_obj
 def list_src(repo):
     for scripts in list(filter(lambda d: 'manifest' in d.keys(), repo.src)):
-        script_list = scripts['manifest'].get('scripts', False)
         click.secho(scripts['manifest']['id'], fg='red')
 
 
-@click.command('exec-src', short_help='Executes script')
+@click.command('src-exec', short_help='Executes script')
 @click.option('--script-id', '-n', default=False, help='Executes script', required=True)
 @click.pass_obj
 def exec_src(repo, script_id):
+    """Execute Script command will run custom scripts stored in the user folder
+    defaults to (~/.proeq/scripts) declared with the manifest.yml file.
+    """
     script_ids = [f['manifest'].get('id') for f in list(filter(lambda d: 'manifest' in d.keys(), repo.src))]
     if script_id not in script_ids:
         raise click.BadParameter("This script-id does not exist!")
     for man in repo.src:
         if man['manifest'].get('id') == script_id:
             script_list0 = man['manifest'].get('scripts')
+            environment = man['manifest'].get('environment')
             base_path = man['manifest'].get('full-path')
     # Sort by order key
-    script_list = sorted(script_list0, key=lambda k: k['order'])
+    script_list0 = sorted(script_list0, key=lambda k: k['order'])
+    script_list = list(filter(lambda d: d.get('active'), script_list0))
     for scr in script_list:
         click.secho("Script order %s" % scr.get('order'), fg='red')
-        host = scr['ssh-server'].get('host')
-        user = scr['ssh-server'].get('user')
-        port = scr['ssh-server'].get('port')
-        with open(os.path.join(base_path, scr.get('file'))) as f:
-            content = f.read()
-        ssh_in(host, port, user, content)
+        if scr.get('ssh-server'):
+            host = scr['ssh-server'].get('host')
+            user = scr['ssh-server'].get('user')
+            port = scr['ssh-server'].get('port')
 
+        script_type = scr.get('type')
+        container_name = scr.get('container')
+        fab_command = scr.get('command')
+
+        content = scr.get('file')
+        if content:
+            with open(os.path.join(base_path, content)) as f:
+                content = f.read()
+                parsed_content = content.format(**environment)
+
+        if script_type == 'ssh':
+            ssh_in(host, port, user, parsed_content)
+        elif script_type == 'shell':
+            shell_in(parsed_content)
+        elif script_type == 'lxc':
+            lxc_in(container_name, parsed_content)
+        elif script_type == 'fabric':
+            fabric_in(fab_command, base_path)
 
 cli.add_command(list_all)
 cli.add_command(list_src)

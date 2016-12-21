@@ -1,5 +1,30 @@
-Welcome to ProEQ's documentation!
-=================================
+ProEQ's documentation!
+======================
+
+Introduction
+------------
+
+ProEQ is a commandline utility for executing scripts into your servers.
+The Utility also provides a project database with the references to all
+ssh servers and other type of useful technical information.
+
+How Does It Work?
+-----------------
+
+ProEQ will read information from a user folder, default location in (~/.proeq).
+The user folder will have the following basic structure:
+
+* ~/.proeq
+   * projects
+   * scripts
+
+Then inside the scripts folder you will need:
+
+* :doc:`How to build a scripts folder <scripts>`
+
+Then inside the projects folder you will need:
+
+* :doc:`How to build a project folder <project>`
 
 
 Install Development
@@ -30,20 +55,17 @@ Use the following structure:
          * project.yml
       * ...
 
-YAML Structure
---------------
-
-
-.. toctree::
-   :maxdepth: 2
-
-   project
-   scripts
-
-
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
 * :ref:`search`
+
+
+.. toctree::
+   :caption: Table of Contents
+   :maxdepth: 2
+
+   projects
+   scripts

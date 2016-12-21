@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to ProEQ’s documentation! &#8212; ProEQ 0.1 documentation</title>
+    <title>ProEQ’s documentation! &#8212; ProEQ 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Structure for Projects" href="project.html" />
+    <link rel="next" title="Structure for Scripts" href="scripts.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -42,8 +42,38 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="welcome-to-proeq-s-documentation">
-<h1>Welcome to ProEQ&#8217;s documentation!<a class="headerlink" href="#welcome-to-proeq-s-documentation" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="proeq-s-documentation">
+<h1>ProEQ&#8217;s documentation!<a class="headerlink" href="#proeq-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>ProEQ is a commandline utility for executing scripts into your servers.
+The Utility also provides a project database with the references to all
+ssh servers and other type of useful technical information.</p>
+</div>
+<div class="section" id="how-does-it-work">
+<h2>How Does It Work?<a class="headerlink" href="#how-does-it-work" title="Permalink to this headline">¶</a></h2>
+<p>ProEQ will read information from a user folder, default location in (~/.proeq).
+The user folder will have the following basic structure:</p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>~/.proeq</dt>
+<dd><ul class="first last">
+<li>projects</li>
+<li>scripts</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Then inside the scripts folder you will need:</p>
+<ul class="simple">
+<li><a class="reference internal" href="scripts.html"><span class="doc">How to build a scripts folder</span></a></li>
+</ul>
+<p>Then inside the projects folder you will need:</p>
+<ul class="simple">
+<li><a class="reference internal" href="project.html"><span class="doc">How to build a project folder</span></a></li>
+</ul>
+</div>
 <div class="section" id="install-development">
 <h2>Install Development<a class="headerlink" href="#install-development" title="Permalink to this headline">¶</a></h2>
 <div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">virtualenv</span> <span class="o">.</span><span class="n">env</span>
@@ -97,15 +127,6 @@
 </li>
 </ul>
 </div>
-<div class="section" id="yaml-structure">
-<h2>YAML Structure<a class="headerlink" href="#yaml-structure" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="project.html">Structure for Projects</a></li>
-<li class="toctree-l1"><a class="reference internal" href="scripts.html">Structure for Scripts</a></li>
-</ul>
-</div>
-</div>
 </div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
@@ -113,6 +134,12 @@
 <li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
 <li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
 </ul>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Structure for Scripts</a></li>
+</ul>
+</div>
 </div>
 
 
@@ -126,10 +153,11 @@
             </a></p>
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Welcome to ProEQ&#8217;s documentation!</a><ul>
+<li><a class="reference internal" href="#">ProEQ&#8217;s documentation!</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#how-does-it-work">How Does It Work?</a></li>
 <li><a class="reference internal" href="#install-development">Install Development</a></li>
 <li><a class="reference internal" href="#create-user-folder">Create User Folder</a></li>
-<li><a class="reference internal" href="#yaml-structure">YAML Structure</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
@@ -138,7 +166,7 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="project.html" title="next chapter">Structure for Projects</a></li>
+      <li>Next: <a href="scripts.html" title="next chapter">Structure for Scripts</a></li>
   </ul></li>
 </ul>
 </div>
